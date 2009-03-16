@@ -4,5 +4,6 @@ dumps/*
 # tutti i file in tutte le subdirectory di dumps
 dumps/**/*
 # ignora i sorgenti di nereau
+core/
 core/**/*
 
