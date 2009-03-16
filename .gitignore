@@ -3,4 +3,6 @@
 dumps/*
 # tutti i file in tutte le subdirectory di dumps
 dumps/**/*
+# i sorgenti di nereau
+core/nereau_0.7/**/*
 
