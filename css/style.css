@@ -1,0 +1,159 @@
+body,td,a,p,.h {
+  font-family:arial,sans-serif;
+}
+
+h3 {
+border-bottom:1px solid #f1ca80;
+}
+
+a {
+  color:maroon;
+}
+a.pagenumber {
+  text-decoration:none;
+}
+
+
+p{
+  margin:0px;
+}
+
+#inactive a.tags {
+  color:rgb(93,82,64);
+  text-decoration:none;
+}
+
+#active a.tags {
+  color:rgb(96,88,69);
+  text-decoration:none;
+}
+
+
+
+div.resultbox {
+  z-index:-1;
+  border:1px solid #f1ca80;
+  margin-bottom:3px;
+  padding:5px;
+  text-align:left;
+}
+
+#inactive {
+  background-color:rgb(192,192,192);
+  position:relative;
+  left:3px;
+  margin:0px;
+  padding:5px;
+  border:1px solid #f1ca80;
+  color:black;
+}
+#inactive a {
+  color:black;
+}
+
+#active {
+  padding:5px;
+  position:relative;
+  left:3px;
+  margin:0px;
+  border-top:1px solid #f1ca80;
+  border-left:1px solid #f1ca80;
+  border-bottom:1px solid #f1ca80;
+  border-right:1px solid white;
+  color:grey;
+}
+
+#active:hover { cursor: pointer; } 
+#inactive:hover { cursor: pointer; } 
+
+
+div#messageboard {
+  width:300px;
+  text-align:center;
+  position:absolute;
+  top:30px;
+  left: 50%;
+  margin-left: -150px;
+  font-size:10px;
+}
+div#error {
+  border:1px solid #f1ca80;
+  padding:0px;
+}
+div#errorheader {
+background-color:rgb(255,255,153);
+text-align:right;
+margin:0px;
+padding:1px;
+}
+
+div#controlpanel {
+  position:absolute;
+  top:8px;
+  right:3px;
+  padding:0px;
+}
+div#actions {
+  /*border:1px solid rgb(245,200,143);*/
+  text-align:center;
+  padding-right:5px;
+  margin-top:3px;
+  margin-bottom:3px;
+  font-size:10px;
+  width:auto;
+}
+div#debugger {
+  text-align:right;
+  font-weight:bold;
+  font-size:11px;
+  /*border:1px solid rgb(245,200,143);*/
+  width:auto;
+}
+p#footer, p#footer a{
+  margin:0px;
+  font-size:9px;
+  font-style:bold;
+  color:grey;
+}
+
+.note {
+  margin:0px;
+  font-size:9px;
+  font-style:bold;
+  color:grey;
+}
+
+form#login_form {
+  margin:8px;
+}
+
+ form#search_form {
+ margin: 0px;
+ }
+ 
+ form#subscribe_form {
+ margin: 0px;
+ width:auto;
+ }
+.custombutton {
+  //font-size:10px;
+  //height:24px;
+  vertical-align:middle;
+
+}
+
+.custominput {
+  border:1px solid #f1ca80; 
+  //height:20px;
+
+}
+
+/* sezione per il reting system */
+    #rateStatus{float:left; clear:both; width:100%; height:20px;}
+    #rateMe{/* float:left; */clear:both; width:70px; height:auto; padding:0px; margin:0px;}
+    #rateMe li{float:left;list-style:none;}
+    #rateMe li a:hover,
+    #rateMe .on{background:url(../images/star_on.gif) no-repeat;}
+    #rateMe a{float:left;background:url(../images/star_off.gif) no-repeat;width:12px; height:12px;}
+    .ratingSaved{display:none;}
+    .saved{color:red; }

@@ -1,0 +1,6 @@
+# ignore per i file non utili alla cartella remota di nereau_web
+# 
+dumps/*
+# tutti i file in tutte le subdirectory di dumps
+dumps/**/*
+

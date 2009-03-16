@@ -1,0 +1,399 @@
+AWSTATS DATA FILE 6.7 (build 1.892)
+# If you remove this file, all statistics for date 200812 will be lost/reset.
+
+# Position (offset in bytes) in this file of beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1864                
+POS_TIME 2543                
+POS_VISITOR 9795                
+POS_DAY 11126               
+POS_DOMAIN 3267                
+POS_LOGIN 3501                
+POS_ROBOT 3656                
+POS_WORMS 3788                
+POS_EMAILSENDER 3919                
+POS_EMAILRECEIVER 4062                
+POS_SESSION 11863               
+POS_SIDER 12074               
+POS_FILETYPES 4197                
+POS_OS 4390                
+POS_BROWSER 4490                
+POS_SCREENSIZE 4701                
+POS_UNKNOWNREFERER 4775                
+POS_UNKNOWNREFERERBROWSER 4862                
+POS_ORIGIN 4944                
+POS_SEREFERRALS 5087                
+POS_PAGEREFS 5231                
+POS_SEARCHWORDS 5379                
+POS_KEYWORDS 5531                
+POS_MISC 2207                
+POS_ERRORS 5590                
+POS_CLUSTER 3357                
+POS_SIDER_404 5723                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20081227115146 27357 6776526 89886196902
+FirstTime 20081201092028
+LastTime 20081227115146
+LastUpdate 20081230040015 0 0 0 0 0
+TotalVisits 112                 
+TotalUnique 29                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 29                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 2 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 69 192 667818 0 0 0
+1 3 24 16679 0 0 0
+2 33 168 436828 0 0 0
+3 7 17 25068 0 0 0
+4 0 0 0 0 0 0
+5 0 0 0 0 0 0
+6 0 0 0 0 0 0
+7 7 33 271302 0 0 0
+8 48 93 682184 0 0 0
+9 94 706 951325 0 29 35119
+10 187 710 1650833 4 15 17308
+11 636 2406 5514679 4 9 10899
+12 159 517 1405837 0 2 2422
+13 436 1269 3337352 2 5 6055
+14 599 1944 5576516 22 37 44807
+15 689 2198 5448955 1 1 1211
+16 751 3188 8767020 5 228 275290
+17 904 3361 6143663 0 4 4844
+18 873 2979 5565709 1 3 3658
+19 641 2150 2302170 0 0 0
+20 731 2653 4761206 0 2 2422
+21 232 653 2127708 0 2 2422
+22 225 765 2044872 0 0 0
+23 120 307 1600663 1 4 6224
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 10 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 1
+ip 7444 26333 59298387
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 10 first Hits must be first (order not required for others)
+BEGIN_ROBOT 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 7
+php 5329 35641291 0 0
+css 2513 595082 0 0
+png 1147 9030803 0 0
+html 2115 7042345 0 0
+js 4633 5815014 0 0
+jpg 5098 982847 0 0
+gif 5498 191005 0 0
+END_FILETYPES
+
+# OS ID - Hits
+BEGIN_OS 5
+macosx 442
+winxp 24292
+winlong 496
+linuxubuntu 844
+linux 259
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 10
+firefox3.0.3 71
+msie6.0 189
+firefox8.04 157
+firefox2.0.0.20 55
+firefox3.0.4 7351
+msie7.0 149
+firefox2.0.0.17 829
+firefox3.0.1 4479
+safari 13043
+firefox3.0.5 10
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 0
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 0
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 1319 1400
+From1 0 0
+From2 0 0
+From3 0 0
+From4 6125 24933
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 0
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 10 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 0
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 5
+403 2 2372
+104 1 1236
+206 1 2591
+301 2 797
+404 335 405685
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 55
+/diagrams/demo_2d_pie.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/images/star.gif 3 http://nereau.eunetwork.net/stars.php
+/images/header_right.gif 2 http://nereau.eunetwork.net/
+/libchart-1.2.1/demo/MultipleLinesChartTest.php 1 -
+/images/generated/user_16_3.png 2 http://nereau.eunetwork.net/public/stats.php
+/actions/images/warning.jpg 6 http://nereau.eunetwork.net/actions/result_parse.php
+/style/images/barh4.png 22 http://nereau.eunetwork.net/index.php
+/actions/function.fopen 1 http://nereau.eunetwork.net/actions/result_parse.php
+/star_off.gif 1 http://nereau.eunetwork.net/stars.php
+/libchart-1.2.1/demo/piecharttest.php 1 -
+/diagrams/demo_2d_bar.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/my_vote_column.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/images/header_bg.gif 2 http://nereau.eunetwork.net/
+/style/images/bar4.png 27 http://nereau.eunetwork.net/index.php
+/diagrams/demo_stock_hle.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/images/generated/ratings_user_16.png 2 http://nereau.eunetwork.net/public/stats.php
+/star_on.gif 1 http://nereau.eunetwork.net/stars.php
+/generated/demo3.png 6 http://nereau.eunetwork.net/
+/diagrams/demo_stock_ashle.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/images/generated/ratings_user16.png 4 http://nereau.eunetwork.net/public/stats.php
+/public/images/nereaupiccolo.jpg 2 http://nereau.eunetwork.net/public/stats.php
+/diagrams/demo_single_line.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/images/nereaugears.jpg 1 http://nereau.eunetwork.net/
+/style/images/barh5.png 22 http://nereau.eunetwork.net/index.php
+/maxchart/indexprova.php 2 -
+/style/images/barh2.png 22 http://nereau.eunetwork.net/index.php
+/public/generated/demo3.png 1 http://nereau.eunetwork.net/public/stats.php
+/diagrams/demo_scatter.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_3d_column.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_2d_group_column.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_radar_compare.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_2d_column.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/stats.php 1 -
+/style/images/bar2.png 27 http://nereau.eunetwork.net/index.php
+/public/index.php 7 http://nereau.eunetwork.net/public/stats.php
+/public/images/nereaugears.jpg 2 http://nereau.eunetwork.net/public/stats.php
+/diagrams/demo_3d_pie.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_stock_shle.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_2d_percent_column.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/style/images/bar1.png 22 http://nereau.eunetwork.net/index.php
+/style/images/barh3.png 22 http://nereau.eunetwork.net/index.php
+/diagrams/demo_radar.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/style/style.css 55 http://nereau.eunetwork.net/
+/diagrams/demo_stock_ahle.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/style/images/bar3.png 27 http://nereau.eunetwork.net/index.php
+/diagrams/demo_3d_percent_column.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/images/generated/user_16_1.png 1 http://nereau.eunetwork.net/public/stats.php
+/diagrams/demo_bubble.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_3d_group_column.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/indexprova.php 1 -
+/images/generated/user__3.png 11 http://nereau.eunetwork.net/public/stats.php
+/diagrams/custom_line.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/diagrams/demo_multiple_line.php 1 http://nereau.eunetwork.net/diagrams/demo.html
+/actions/js/ratingsys.js 5 http://nereau.eunetwork.net/actions/result_parse.php
+/images/header_left.gif 2 http://nereau.eunetwork.net/
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 29
+85.18.136.103 3697 12884 23722450 20081219231505
+193.204.167.200 2849 11427 24890331 20081219162437
+89.97.235.5 158 323 2395915 20081218075055
+131.251.127.79 131 253 852371 20081217150314
+87.6.234.149 89 125 864722 20081212162931
+72.14.193.3 83 208 962387 20081217231154
+85.18.14.34 81 211 1082448 20081220144412
+87.3.222.93 40 94 320246 20081215213124
+193.204.161.23 31 42 226110 20081201165353
+94.37.55.95 29 47 329719 20081208172747
+82.59.174.239 26 51 338090 20081215225641
+81.208.83.230 9 19 146149 20081208180020
+193.204.167.87 1 9 92164 20081212161307
+87.10.113.252 12 49 70556 20081226164316
+81.208.83.225 10 48 167579 20081209215643
+151.32.152.225 3 24 16679 20081216015952
+193.204.161.28 24 40 284775 20081216132956
+87.17.36.145 5 23 161168 20081221204250
+87.17.32.250 21 64 405284 20081222153215
+87.7.51.183 18 105 281316 20081225153551
+84.220.247.131 19 30 270432 20081227115146 20081227114529 /actions/result_parse.php
+87.20.212.107 28 57 241285 20081216220756
+94.37.142.138 15 25 175022 20081210195256
+87.10.113.23 4 7 38185 20081226164548
+80.104.231.136 26 61 343554 20081215235818
+87.11.225.93 24 48 287757 20081213105513
+84.221.6.40 1 9 92164 20081212182700
+84.223.211.145 5 15 118288 20081207133509
+87.10.113.140 5 35 121241 20081224113651
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 26
+20081201 79 144 657501 4
+20081202 908 3169 2092184 4
+20081203 879 2359 5146195 6
+20081204 251 932 2210385 5
+20081205 504 1406 4610423 2
+20081206 787 2069 6728114 3
+20081207 303 1312 1413875 7
+20081208 666 2685 2851635 8
+20081209 219 1331 1269728 3
+20081210 288 1670 3538655 9
+20081211 9 20 178864 1
+20081212 289 822 2211262 8
+20081213 319 1246 4226291 8
+20081214 2 20 71459 1
+20081215 674 2966 5808413 9
+20081216 329 1032 4993541 7
+20081217 420 924 4502285 8
+20081218 151 747 1622388 6
+20081219 276 1141 3525463 3
+20081220 7 25 291544 1
+20081221 5 23 161168 1
+20081222 21 64 405284 2
+20081224 5 35 121241 1
+20081225 18 105 281316 2
+20081226 16 56 108741 2
+20081227 19 30 270432 1
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 7
+1h+ 26
+5mn-15mn 19
+30s-2mn 11
+2mn-5mn 8
+15mn-30mn 10
+0s-30s 23
+30mn-1h 14
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 43
+/actions/result_parse.php 2529 29590954 0 27
+/ 2112 7033457 96 31
+/index.php 1513 5147280 9 27
+/actions/login.php 651 193281 3 2
+/actions/logout.php 261 57459 0 0
+/public/stats.php 212 411867 3 18
+/actions/rate.php 71 2799 1 6
+/actions/cookie.php 31 507 0 0
+/chart/indexprova.php 8 52456 0 0
+/stars.php 7 11535 0 0
+/plchart/demo_stock_hle.php 1 4519 0 0
+/plchart/demo.html 1 1108 0 0
+/diagrams/demo_vote_zheng.php 2 1276 0 0
+/actions/saveuser.php 5 839 0 0
+/libchart-1.2.1/demo/MultipleLineChartTest.php 2 816 0 0
+/libchart-1.2.1/demo/VerticalBarChartTest.php 1 426 0 0
+/plchart/demo_scatter.php 1 4696 0 0
+/libchart-1.2.1/demo/MultipleHorizontalBarChartTest.php 1 408 0 0
+/maxChart/indexprova.php 1 6557 0 0
+/plchart/demo_multiple_line.php 1 7725 0 0
+/plchart/demo_radar_compare.php 1 8839 0 0
+/plchart/demo_bubble.php 1 5173 0 0
+/prova.php 5 16 0 0
+/plchart/custom_line.php 1 2955 0 0
+/diagrams/demo.html 1 1223 0 0
+/plchart/demo_3d_column.php 1 8241 0 0
+/plchart/demo_stock_ashle.php 1 6336 0 0
+/plchart/demo_3d_percent_column.php 1 8476 0 0
+/plchart/demo_3d_pie.php 2 16868 0 0
+/libchart-1.2.1/demo/PieChartTest.php 4 1953 0 0
+/plchart/demo_radar.php 1 7657 0 0
+/plchart/demo_stock_ahle.php 1 6333 0 0
+/plchart/demo_2d_pie.php 1 8493 0 0
+/maxChart/ 1 6557 0 0
+/plchart/demo_stock_shle.php 1 4464 0 0
+/plchart/demo_2d_percent_column.php 1 7433 0 0
+/indexprova.php 3 19671 0 0
+/plchart/demo_single_line.php 1 5614 0 0
+/plchart/my_vote_column.php 1 5501 0 0
+/plchart/demo_2d_column.php 1 6237 0 0
+/plchart/demo_2d_group_column.php 1 7066 0 0
+/public/subscribe.php 1 613 0 0
+/plchart/demo_3d_group_column.php 1 7952 0 0
+END_SIDER

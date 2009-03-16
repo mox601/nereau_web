@@ -1,0 +1,303 @@
+AWSTATS DATA FILE 6.7 (build 1.892)
+# If you remove this file, all statistics for date 200811 will be lost/reset.
+
+# Position (offset in bytes) in this file of beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1864                
+POS_TIME 2533                
+POS_VISITOR 6534                
+POS_DAY 7022                
+POS_DOMAIN 3185                
+POS_LOGIN 3418                
+POS_ROBOT 3573                
+POS_WORMS 3705                
+POS_EMAILSENDER 3836                
+POS_EMAILRECEIVER 3979                
+POS_SESSION 7689                
+POS_SIDER 7898                
+POS_FILETYPES 4114                
+POS_OS 4282                
+POS_BROWSER 4380                
+POS_SCREENSIZE 4528                
+POS_UNKNOWNREFERER 4602                
+POS_UNKNOWNREFERERBROWSER 4746                
+POS_ORIGIN 4828                
+POS_SEREFERRALS 4968                
+POS_PAGEREFS 5112                
+POS_SEARCHWORDS 5294                
+POS_KEYWORDS 5446                
+POS_MISC 2197                
+POS_ERRORS 5505                
+POS_CLUSTER 3274                
+POS_SIDER_404 5636                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20081201092028 1 0 37037500929
+FirstTime 20081102135112
+LastTime 20081129145626
+LastUpdate 20081202040013 1 0 0 0 0
+TotalVisits 84                  
+TotalUnique 10                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 10                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 0 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 103 248 585211 0 0 0
+1 63 155 188342 0 0 0
+2 11 29 33580 0 0 0
+3 0 0 0 0 0 0
+4 0 0 0 0 0 0
+5 0 0 0 0 0 0
+6 0 0 0 0 0 0
+7 0 0 0 0 0 0
+8 3 9 102570 0 0 0
+9 1 4 80680 0 0 0
+10 16 38 155703 0 0 0
+11 135 211 1362384 2 2 1578
+12 17 55 263861 0 0 0
+13 209 538 1124871 0 0 0
+14 866 2128 3260987 10 12 14682
+15 395 769 1605822 0 4 4844
+16 329 695 1262602 0 0 0
+17 604 1495 2231238 6 7 8577
+18 184 358 913241 2 2 2422
+19 79 158 530849 0 0 0
+20 158 319 668631 0 0 0
+21 63 131 315575 0 0 0
+22 262 457 591608 0 0 0
+23 12 32 48266 0 0 0
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 10 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 1
+ip 3510 7829 15326021
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 10 first Hits must be first (order not required for others)
+BEGIN_ROBOT 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 6
+php 3140 9216658 0 0
+css 1273 242524 0 0
+html 370 670915 0 0
+jpg 1372 1333149 0 0
+js 1353 3848040 0 0
+gif 321 14735 0 0
+END_FILETYPES
+
+# OS ID - Hits
+BEGIN_OS 5
+macosx 102
+winlong 10
+winxp 7024
+linuxubuntu 692
+Unknown 1
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 6
+firefox3.0.3 82
+firefox2.0.0.18 21
+firefox2.0.0.17 701
+firefox3.0.1 615
+safari 6409
+netscape4.0 1
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 1
+Mozilla/4.0_(vBSEO;_http://www.vbseo.com) 20081119145908
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 0
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 693 698
+From1 0 0
+From2 0 0
+From3 1 1
+From4 2816 7130
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 0
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 10 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 1
+http://www.facebook.com/l.php 1 1
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 5
+403 1 1186
+104 3 3708
+500 7 8652
+404 15 18165
+301 1 392
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 10
+/css/images/tabrightH.gif 2 http://nereau.eunetwork.net/index.php
+/www.google.com 2 http://nereau.eunetwork.net/index.php
+/function.socket-read 2 http://nereau.eunetwork.net/index.php
+/css/images/tableftH.gif 2 http://nereau.eunetwork.net/index.php
+/modules/index.php 1 http://nereau.eunetwork.net/modules/search_form.php
+/css/tableftH.gif 1 http://nereau.eunetwork.net/index.php
+/function.socket-write 2 http://nereau.eunetwork.net/index.php
+/css/tabrightH.gif 1 http://nereau.eunetwork.net/index.php
+/modules/socket.php 1 -
+/images/nereaunew.jpg 1 http://nereau.eunetwork.net/index.php
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 10
+193.204.167.200 2370 5494 9324520 20081126160352
+85.18.136.103 846 1866 3114055 20081129145626
+85.18.14.34 255 389 2079506 20081128085539
+72.14.193.3 18 34 262062 20081122154941
+80.181.204.210 6 11 146337 20081116185532
+93.148.134.250 5 14 89812 20081105012300
+89.97.21.217 4 9 138023 20081115151305
+85.18.136.95 3 6 85087 20081105000847
+85.18.170.100 2 5 83174 20081106135632
+213.92.95.226 1 1 3445 20081119145908
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 25
+20081102 7 8 87952 2
+20081103 14 15 74892 1
+20081104 348 521 1445868 4
+20081105 397 965 1506007 8
+20081106 202 440 894999 6
+20081107 355 696 926504 5
+20081108 97 158 234070 6
+20081109 172 341 863100 7
+20081110 500 1166 1420289 6
+20081111 232 457 1308574 4
+20081113 220 560 972626 5
+20081114 207 529 682542 4
+20081115 24 52 362205 5
+20081116 83 109 600924 2
+20081117 20 49 54182 1
+20081118 159 533 734742 2
+20081119 445 1146 2413905 6
+20081120 3 9 103624 1
+20081121 7 20 47883 2
+20081122 4 13 90930 2
+20081124 3 9 102678 1
+20081125 3 9 102686 1
+20081126 4 10 105093 1
+20081128 3 9 102570 1
+20081129 1 5 87176 1
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 7
+1h+ 15
+5mn-15mn 14
+0s-30s 25
+30s-2mn 7
+2mn-5mn 6
+15mn-30mn 7
+30mn-1h 10
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 15
+/index.php 1406 3630802 12 17
+/actions/result_parse.php 880 5016233 0 39
+/ 370 670915 68 16
+/actions/login.php 260 141767 0 1
+/modules/socket.php 151 41103 3 2
+/actions/logout.php 145 81994 0 0
+/modules/result_parser.php 112 255531 1 4
+/actions/click.php 80 16444 0 4
+/prova.php 56 19682 0 0
+/actions/prova.php 20 1497 0 0
+/actions/saveuser.php 15 5245 0 0
+/modules/socket2.php 5 4470 0 0
+/modules/search_form.php 1 189 0 1
+/___prova.php 7 1665 0 0
+/modules/query_submit.php 2 36 0 0
+END_SIDER
