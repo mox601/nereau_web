@@ -48,6 +48,7 @@ function back () {
         
 }
 
+/* funzione generica per l'invio di comandi al server in formato json */
 function exec_cmd ($cmd, $args) {
               $args['userid'] = $_SESSION['userid'];
               $args['session_id'] = session_id();

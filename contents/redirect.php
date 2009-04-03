@@ -1,6 +1,6 @@
 <?php 
 
-//codice per aggiornare le informazioni dopo il click
+//codice per aggiornare le informazioni nel momento del click
 
 
 
