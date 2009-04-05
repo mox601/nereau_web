@@ -1,5 +1,5 @@
 <?php
-
+// parametri per nereau locale 
 $dbhost = 'localhost';
 $dbuser = 'postgres';
 $dbpassword = 'prova';

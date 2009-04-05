@@ -22,15 +22,22 @@ $args['query']=$key;
 $args['language']=$_SESSION['language'];
 
 $espansione = exec_cmd ('expand', $args);
+//é meglio fare un nuovo comando, che riceva soltanto i risultati della nuova
+$espansione_new = exec_cmd ('expand_new', $args);
 
 
 //numero di query espanse ottenute
 $num_query = sizeof($espansione['results']);
+//numero di new query espanse ottenute
+$num_query_new = sizeof($espansione_new['results']);
 
-echo "(" . $num_query . " expansions available)</p>"; 
+// stampa il numero delle espansioni, vecchie e nuove
+echo "(" . $num_query . " OLD expansions available)</p>"; 
+echo "(" . $num_query_new . " NEW expansions available)</p>"; 
 
 ?>
 
+// risultati vecchi
   <script language=javascript>
     array_risultati = new Array("result"
     
@@ -44,16 +51,30 @@ echo "(" . $num_query . " expansions available)</p>";
     ?>
     );
   </script>
+// END risultati vecchi
+
+// risultati nuovi
+  <script language=javascript>
+// cosa c'é nell'array?
+    array_risultati_new = new Array("result"
+    
+    <?php
+    //popolamento dell'array array_risultati utile per mostrare/nascondere i div dei risultati durante il rollover da menu
+      for($i=0; $i<$num_query_new; $i++) {
+        echo ", \"result" . $i . "\"";
+      }
+      
+    ?>
+    );
+  </script>
+
+
+// END risultati nuovi
 
 <center>
 <table width=100% cellspacing=0 style="margin:0px;">
   <tr>
    <td width=200 valign=top>
-   
-
-   
-   
-   
    
         <div id=active onclick="
         document.getElementById('active').id='inactive';
@@ -123,6 +144,10 @@ echo "(" . $num_query . " expansions available)</p>";
         <?php
         
         //costruzione dei successivi div per i resultbox ed esecuzione delle query a google
+        // aggiungi un altro ciclo per stampare i nuovi risultati
+        
+        
+        
           for($i=0; $i<$num_query; $i++) {
           //sostituzione degli spazi dalla query corrente
           $query = $espansione['results'][$i]['query'];

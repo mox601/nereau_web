@@ -20,6 +20,7 @@ $tags = $_GET['tag'];
 //query a google
 $size='large';
 $googlequery = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&hl=" . $_SESSION['language'] . "&start=" . $start . "&rsz=" . $size . "&hl=it&lstkp=45&q=" . $expandedqueryescaped;
+// ricevo il risultato della query a google
 $string = fgets(fopen($googlequery, "r")); 
 $obj = json_decode($string, true);
 
