@@ -55,6 +55,8 @@ $obj = json_decode($string, true);
         
       </div>    
     
+    
+    
       <SCRIPT LANGUAGE="JavaScript">
       //se è gia stata espressa una preferenza...
       if(preSet[<?php echo $numerodiv?>]) {
@@ -67,9 +69,7 @@ $obj = json_decode($string, true);
         //setta di nuovo il sistema di rating sul valore impostato ma senza reinviare i dati
         target = document.getElementById(id);
         rating(target, <?php echo $numerodiv?>);
-        rateIt(target, <?php echo $numerodiv?>, false);
-        
-        
+        rateIt(target, <?php echo $numerodiv?>, false);        
       }
       </SCRIPT>  
 
