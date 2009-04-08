@@ -147,7 +147,40 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 
 
 <!-- START blocchi successivi, con le espansioni TAGTFIDF - CLUSTERING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-
+  
+        <?php
+        //costruzione dei pulsanti di menu
+          for($i=0; $i<$num_query_tfidf; $i++) {
+          ?>
+          <div id=inactive onclick="
+        document.getElementById('active').id='inactive';
+        this.id='active'; 
+        nascondi_elementi_array(array_risultati_tfidf);
+        $('result<?php echo $i; ?>').show();
+        ">
+        <center>
+        	<a class=tags href=#>
+                
+                <?php   
+      //calcolo preliminare del massimo valore di rank tra i tags successivamente utile per la grandezza del testo
+                $max=0;
+                for ($p=0; $p<(sizeof($espansione_tfidf['results'][$i]['tags'])); $p++) {
+                  $actual = $espansione_tfidf['results'][$i]['tags'][$p]['rank'];
+                  if ($actual > $max) $max = $actual;
+                } ?>
+                
+                <?php 
+                //creo l'array dei tag da passare tramite ajax
+                $tags_tfidf[$i] = "";
+                //visualizzazione dei tag associati alla query espansa corrente 
+                for ($j=0; $j<(sizeof($espansione_tfidf['results'][$i]['tags'])); $j++) {
+                  $tags_tfidf[$i] = $tags_tfidf[$i] . $espansione_tfidf['results'][$i]['tags'][$j]['rank'] . ":" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "|";
+                  echo "<span style=\"font-size:" . (5+9*($espansione_tfidf['results'][$i]['tags'][$j]['rank'] / $max)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
+                } ?>              
+          		</a>
+          	</center>
+          	</div> <!-- END div id inactive -->
+          <? } ?>
 
 <!-- END blocchi successivi, con le espansioni TAGTFIDF - CLUSTERING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
@@ -169,11 +202,18 @@ mostra i tag che hanno partecipato ad ogni espansione -->
    
 <!-- resultbox contiene i risultati veri e propri, quelli di google  %%%%%%%%%%%%%%%%%%%%%%%%%%% -->
     <td valign=top>
-        <!-- Primo div riservato alla query non espansa -->
-        <div id="result" class="resultbox"><center>Loading..<br><img src=images/loading.gif><br><br><br><br></center></div>
+        <!-- START Primo div riservato alla query non espansa -->
+        <div id="result" class="resultbox">
+        	<center>Loading..<br>
+        		<img src=images/loading.gif><br><br><br><br>
+        	</center>
+        </div>
             <script language="JavaScript">
             new Ajax.Updater('result', 'actions/result_parse.php', { method: 'get',parameters: {numerodiv:'', expandedquery: '<?php echo $key; ?>', originalquery:'<?php echo $key; ?>'}});
             </script>
+        <!-- END Primo div riservato alla query non espansa -->
+    
+            
             
         <!-- START div dell'espansione originale di nereau per i resultbox ed esecuzione delle query a google   %%% -->
         <?php
@@ -181,13 +221,52 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           //sostituzione degli spazi dalla query corrente
           $query = $espansione['results'][$i]['query'];
           ?>
-          <div id="result<?php echo $i; ?>" class="resultbox" style="display:none"><center>Loading..<br><img src=images/loading.gif><br><br><br><br></center></div>
-            <script language="JavaScript">
-            
+          <div id="result<?php echo $i; ?>" class="resultbox" style="display:none">
+	          <center>Loading..<br>
+          		<img src=images/loading.gif><br><br><br><br>
+          	</center>
+          </div>
+          
+          <script language="JavaScript">
             new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox ed esecuzione delle query a google   %%%%%%% -->
+
+
+
+<!-- START TAG TFIDF-->
+
+        <!-- START div dell'espansione TAG TFIDF ed esecuzione delle query a google   %%% -->
+        <?php
+          for($i=0; $i<$num_query_tfidf; $i++) {
+          //sostituzione degli spazi dalla query corrente
+          $query_tfidf = $espansione_tfidf['results'][$i]['query'];
+          ?>
+          <!-- potrei aggiungere una classe o l'id dei risultati per cambiare lo stile css -->
+          <div id="result<?php echo $i; ?>" class="resultbox" style="display:none">
+	          <center>Loading..<br>
+          		<img src=images/loading.gif><br><br><br><br>
+          	</center>
+          </div>
+          
+          <script language="JavaScript">
+            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
+            </script>
+          <? } ?>
+        <!-- END  div per i resultbox TAG TFIDF ed esecuzione delle query a google   %%%%%%% -->
+        
+<!-- END TAG TFIDF-->
+
+
+
+
+
+
+
+
+
+
 
     </td>
 
