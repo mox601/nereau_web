@@ -39,7 +39,7 @@ Saving user...
 <?php
 
 if ($result['code']==200) {
-  //eseguo il login e redirecto alla homepage
+  //eseguo il login e redirect alla homepage
   ?>
   
     <SCRIPT language="JavaScript">
