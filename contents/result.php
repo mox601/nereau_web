@@ -24,22 +24,25 @@ $args['language']=$_SESSION['language'];
 $espansione = exec_cmd ('expand', $args);
 $espansione_tfidf = exec_cmd ('expand_tfidf', $args);
 //espansione con co-occorrenze tag tag
-$espansione_coocc = exec_cmd ('expand_tfidf', $args);
+//$espansione_coocc = exec_cmd ('expand_tfidf', $args);
 
 
 //numero di query espanse ottenute
 $num_query = sizeof($espansione['results']);
 //numero di new query espanse ottenute
 $num_query_tfidf = sizeof($espansione_tfidf['results']);
-$num_query_coocc = sizeof($espansione_coocc['results']);
+//$num_query_coocc = sizeof($espansione_coocc['results']);
 
 // stampa il numero delle espansioni, vecchie e nuove
 echo "(" . $num_query . " OLD expansions available)</p>"; 
 echo "(" . $num_query_tfidf . " TFIDF expansions available)</p>"; 
-echo "(" . $num_query_coocc . " CO-OCC expansions available)</p>"; 
+//echo "(" . $num_query_coocc . " CO-OCC expansions available)</p>"; 
 ?>
 
 <!-- risultati vecchi %%%%%% -->
+
+<!-- START costruzione degli array che contengono i risultati -->
+
   <script language=javascript>
     array_risultati = new Array("result"
     
@@ -64,7 +67,10 @@ echo "(" . $num_query_coocc . " CO-OCC expansions available)</p>";
     
     <?php
     //popolamento dell'array array_risultati utile per mostrare/nascondere i div dei risultati durante il rollover da menu
+
       for($i=0; $i<$num_query_tfidf; $i++) {
+	//cambio gli estremi perché questi risultati abbiano gli id successivi rispetto a quelli vecchi
+//      for($i=$num_query; $i< $num_query + $num_query_tfidf; $i++) {	
         echo ", \"result" . $i . "\"";
       }
       
@@ -77,6 +83,11 @@ echo "(" . $num_query_coocc . " CO-OCC expansions available)</p>";
 
 <!-- START risultati COOCC %%% -->
 <!-- END risultati COOCC %%% -->
+
+<!-- END costruzione degli array che contengono i risultati -->
+
+
+
 
 
 
@@ -92,7 +103,10 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         document.getElementById('active').id='inactive';
         this.id='active'; 
         nascondi_elementi_array(array_risultati);
+        //nascondo anche gli altri risultati
+        nascondi_elementi_array(array_risultati_tfidf);
         $('result').show();
+        //sintassi di prototype.js getElementById(...)
         ">
         <center>
         	<a class=tags href=#> 
@@ -111,18 +125,23 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         <?php
         //costruzione dei pulsanti di menu
           for($i=0; $i<$num_query; $i++) {
+          	//ogni $i é l'id dell'etichetta dei tags
+          	
           ?>
           <div id=inactive onclick="
         document.getElementById('active').id='inactive';
         this.id='active'; 
         nascondi_elementi_array(array_risultati);
+        //nascondi anche gli altri risultati tfidf
+		nascondi_elementi_array(array_risultati_tfidf);
+        //mostra i risultati contenuti nell'identificatore result[$i]
         $('result<?php echo $i; ?>').show();
         ">
         <center>
         	<a class=tags href=#>
                 
                 <?php   
-      //calcolo preliminare del massimo valore di rank tra i tags successivamente utile per la grandezza del testo
+      //calcolo preliminare del massimo valore di rank tra i tags: successivamente utile per la grandezza del testo
                 $max=0;
                 for ($p=0; $p<(sizeof($espansione['results'][$i]['tags'])); $p++) {
                   $actual = $espansione['results'][$i]['tags'][$p]['rank'];
@@ -146,15 +165,26 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 
 
 
+
+
+
+
+
+
 <!-- START blocchi successivi, con le espansioni TAGTFIDF - CLUSTERING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
   
         <?php
         //costruzione dei pulsanti di menu
+        //con gli id modificati per avere id successivi rispetto ai risultati precedenti/
+        //meglio avere un array distinto?
           for($i=0; $i<$num_query_tfidf; $i++) {
+   	      //for($i=$num_query; $i< $num_query + $num_query_tfidf; $i++) {	
+
           ?>
           <div id=inactive onclick="
         document.getElementById('active').id='inactive';
         this.id='active'; 
+//        nascondi_elementi_array(array_risultati);
         nascondi_elementi_array(array_risultati_tfidf);
         $('result<?php echo $i; ?>').show();
         ">
@@ -238,11 +268,18 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 <!-- START TAG TFIDF-->
 
         <!-- START div dell'espansione TAG TFIDF ed esecuzione delle query a google   %%% -->
+
         <?php
           for($i=0; $i<$num_query_tfidf; $i++) {
+	// modifico gli indici!
+         // for($i=$num_query; $i< $numquery + $num_query_tfidf; $i++) {
           //sostituzione degli spazi dalla query corrente
           $query_tfidf = $espansione_tfidf['results'][$i]['query'];
           ?>
+          
+          <!-- cambio l'id perché cosi i risultati hanno id molto diversi 
+          result_tfidf$i
+          -->
           <!-- potrei aggiungere una classe o l'id dei risultati per cambiare lo stile css -->
           <div id="result<?php echo $i; ?>" class="resultbox" style="display:none">
 	          <center>Loading..<br>
