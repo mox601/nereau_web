@@ -29,7 +29,7 @@ $espansione_tfidf = exec_cmd ('expand_tfidf', $args);
 
 //numero di query espanse ottenute
 $num_query = sizeof($espansione['results']);
-//numero di new query espanse ottenute
+//numero di new query tfidf espanse ottenute
 $num_query_tfidf = sizeof($espansione_tfidf['results']);
 //$num_query_coocc = sizeof($espansione_coocc['results']);
 
@@ -42,12 +42,11 @@ echo "(" . $num_query_tfidf . " TFIDF expansions available)</p>";
 <!-- risultati vecchi %%%%%% -->
 
 <!-- START costruzione degli array che contengono i risultati -->
+<!-- creo due array diversi. -->
 
   <script language=javascript>
     array_risultati = new Array("result"
-    
     <?php
-    
     //popolamento dell'array array_risultati utile per mostrare/nascondere i div dei risultati durante il rollover da menu
       for($i=0; $i<$num_query; $i++) {
         echo ", \"result" . $i . "\"";
@@ -66,12 +65,14 @@ echo "(" . $num_query_tfidf . " TFIDF expansions available)</p>";
     array_risultati_tfidf = new Array("result"
     
     <?php
+	//posso levare il result iniziale? non ha molto senso per me... 
+	//lo lascio
     //popolamento dell'array array_risultati utile per mostrare/nascondere i div dei risultati durante il rollover da menu
 
       for($i=0; $i<$num_query_tfidf; $i++) {
-	//cambio gli estremi perché questi risultati abbiano gli id successivi rispetto a quelli vecchi
+	//cambio gli id perché questi risultati abbiano gli id successivi rispetto a quelli vecchi
 //      for($i=$num_query; $i< $num_query + $num_query_tfidf; $i++) {	
-        echo ", \"result" . $i . "\"";
+        echo ", \"result" . $i + $num_query . "\"";
       }
       
     ?>
@@ -98,7 +99,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
   <tr>
    <td width=200 valign=top>
  
-<!-- primo blocco, risultati standard Uncustomized -->
+<!-- primo blocco, risultati standard Uncustomized, diretti da google -->
         <div id=active onclick="
         document.getElementById('active').id='inactive';
         this.id='active'; 
@@ -120,7 +121,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         
         
         
-<!-- START blocchi successivi, con le espansioni STANDARD %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<!-- START blocchi successivi, con le espansioni STANDARD old nereau %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
         
         <?php
         //costruzione dei pulsanti di menu
@@ -134,7 +135,8 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         nascondi_elementi_array(array_risultati);
         //nascondi anche gli altri risultati tfidf
 		nascondi_elementi_array(array_risultati_tfidf);
-        //mostra i risultati contenuti nell'identificatore result[$i]
+        //mostra i risultati riferiti dall'identificatore result[$i]
+		//TODO: devo cambiare gli id ai risultati nuovi!
         $('result<?php echo $i; ?>').show();
         ">
         <center>
@@ -149,7 +151,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
                 } ?>
                 
                 <?php 
-                //creo l'array dei tag da passare tramite ajax
+                //creo l'array dei tag da passare tramite ajax, quello che viene registrato durante il ranking con le stelline
                 $tags[$i] = "";
                 //visualizzazione dei tag associati alla query espansa corrente 
                 for ($j=0; $j<(sizeof($espansione['results'][$i]['tags'])); $j++) {
@@ -176,18 +178,20 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         <?php
         //costruzione dei pulsanti di menu
         //con gli id modificati per avere id successivi rispetto ai risultati precedenti/
-        //meglio avere un array distinto?
+        //meglio avere un array distinto? si
           for($i=0; $i<$num_query_tfidf; $i++) {
-   	      //for($i=$num_query; $i< $num_query + $num_query_tfidf; $i++) {	
+   	      //for($i=$num_query; $i< $num_query + $num_query_tfidf; $i++) {
+			$result_id = $i + $num_query
 
           ?>
           <div id=inactive onclick="
         document.getElementById('active').id='inactive';
         this.id='active'; 
-//        nascondi_elementi_array(array_risultati);
+        nascondi_elementi_array(array_risultati);
         nascondi_elementi_array(array_risultati_tfidf);
-        $('result<?php echo $i; ?>').show();
+        $('result_tagtfidf<?php echo $result_id; ?>').show();
         ">
+		<!-- ho cambiato il valore dell'id associato all'etichetta da mostrare con show -->
         <center>
         	<a class=tags href=#>
                 
@@ -200,7 +204,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
                 } ?>
                 
                 <?php 
-                //creo l'array dei tag da passare tramite ajax
+                //creo l'array dei tag da passare tramite ajax, cambiato il nome
                 $tags_tfidf[$i] = "";
                 //visualizzazione dei tag associati alla query espansa corrente 
                 for ($j=0; $j<(sizeof($espansione_tfidf['results'][$i]['tags'])); $j++) {
@@ -228,11 +232,15 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 
    
    
+
+
+<!-- result boxes di DX, dove ci sono i risultati di google -->
    
    
 <!-- resultbox contiene i risultati veri e propri, quelli di google  %%%%%%%%%%%%%%%%%%%%%%%%%%% -->
     <td valign=top>
-        <!-- START Primo div riservato alla query non espansa -->
+        <!-- START Primo div riservato alla query NON espansa 
+	OCCHIO AI DIV=ID!!  -->
         <div id="result" class="resultbox">
         	<center>Loading..<br>
         		<img src=images/loading.gif><br><br><br><br>
@@ -245,23 +253,37 @@ mostra i tag che hanno partecipato ad ogni espansione -->
     
             
             
+
+
+
+
         <!-- START div dell'espansione originale di nereau per i resultbox ed esecuzione delle query a google   %%% -->
         <?php
           for($i=0; $i<$num_query; $i++) {
           //sostituzione degli spazi dalla query corrente
           $query = $espansione['results'][$i]['query'];
           ?>
+<!-- ecco qui che setta l'id del div! -->
           <div id="result<?php echo $i; ?>" class="resultbox" style="display:none">
 	          <center>Loading..<br>
           		<img src=images/loading.gif><br><br><br><br>
           	</center>
           </div>
           
+<!-- e qui setta l'updater ajax che prende come parametri l'id (il result $i) e diversi altri parametri caratteristici dell'espansione -->
           <script language="JavaScript">
             new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox ed esecuzione delle query a google   %%%%%%% -->
+
+
+
+
+
+
+
+
 
 
 
@@ -271,24 +293,24 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 
         <?php
           for($i=0; $i<$num_query_tfidf; $i++) {
-	// modifico gli indici!
-         // for($i=$num_query; $i< $numquery + $num_query_tfidf; $i++) {
           //sostituzione degli spazi dalla query corrente
           $query_tfidf = $espansione_tfidf['results'][$i]['query'];
+		  //gli id dei result sono tutti successivi agli id delle espansioni precedenti
+		  $result_id = $i + $num_query;
           ?>
           
-          <!-- cambio l'id perché cosi i risultati hanno id molto diversi 
-          result_tfidf$i
+          <!-- cambio l'id perché cosi i risultati hanno id  diversi 
+          result_tfidf$i? NO, lascio tutto con id result + $i + $num_query per tenere conto degli id assegnati in precedenza ai div dei risultati. 
           -->
           <!-- potrei aggiungere una classe o l'id dei risultati per cambiare lo stile css -->
-          <div id="result<?php echo $i; ?>" class="resultbox" style="display:none">
+          <div id="result<?php echo $result_id; ?>" class="resultbox" style="display:none">
 	          <center>Loading..<br>
           		<img src=images/loading.gif><br><br><br><br>
           	</center>
           </div>
-          
+
           <script language="JavaScript">
-            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
+            new Ajax.Updater('result<?php echo $result_id; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $result_id; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox TAG TFIDF ed esecuzione delle query a google   %%%%%%% -->

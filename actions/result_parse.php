@@ -11,6 +11,8 @@ $expandedquery = assicura($_GET['expandedquery']);
 $expandedqueryescaped = str_replace(" ", "%20", $expandedquery);
 $originalquery = assicura($_GET['originalquery']);
 //il numero di riferimento del div contenente i risultati, utile per aprire la pagina successiva o precedente sempre nello stesso div
+//TODO: dovrei fargli aprire la pagina successiva o precedente nel div con id giusto, cioé tenere conto del tipo di espansione che ho fatto, se con tfidf o con nereau vecchio: ho cambiato gli id dei div, quindi anche qui devo ricevere in qualche modo questa differenza. posso prendere un ulteriore parametro dalla $_GET?
+
 isset($_GET['numerodiv'])?$numerodiv=assicura($_GET['numerodiv']):$numerodiv="";
 //aprire i link in una nuova pagina oppure no? dipende dal cookie!
 if (isset($_COOKIE['tab']) && $_COOKIE['tab'] == 'on') { $tab = true;} else {$tab=false;}
