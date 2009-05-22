@@ -62,19 +62,24 @@ echo "(" . $num_query_tfidf . " TFIDF expansions available)</p>";
 <!-- START risultati TFIDF %%% -->
   <script language=javascript>
 
-    array_risultati_tfidf = new Array("result"
+    array_risultati_tfidf = new Array(
     
     <?php
 	//posso levare il result iniziale? non ha molto senso per me... 
-	//lo lascio
+	//lo lascio? lo levo! devo avere solo gli id dei div dove ci sono 
+	//risultati dell'espansione tag tfidf
     //popolamento dell'array array_risultati utile per mostrare/nascondere i div dei risultati durante il rollover da menu
 
       for($i=0; $i<$num_query_tfidf; $i++) {
 	//cambio gli id perché questi risultati abbiano gli id successivi rispetto a quelli vecchi
 //      for($i=$num_query; $i< $num_query + $num_query_tfidf; $i++) {	
-        echo ", \"result" . $i + $num_query . "\"";
-      }
-      
+		$id_result = $i + $num_query;
+        echo "\"result" . $id_result . "\"";
+		//separatore tra i valori dell'array
+		if($i<($num_query_tfidf - 1)) {
+			echo ", ";
+		}
+      }      
     ?>
     );
   </script>
@@ -104,10 +109,10 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         document.getElementById('active').id='inactive';
         this.id='active'; 
         nascondi_elementi_array(array_risultati);
-        //nascondo anche gli altri risultati
+        //nascondo anche gli altri risultati del tfidf
         nascondi_elementi_array(array_risultati_tfidf);
         $('result').show();
-        //sintassi di prototype.js getElementById(...)
+        //é la sintassi di prototype.js getElementById(...)
         ">
         <center>
         	<a class=tags href=#> 
@@ -136,7 +141,6 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         //nascondi anche gli altri risultati tfidf
 		nascondi_elementi_array(array_risultati_tfidf);
         //mostra i risultati riferiti dall'identificatore result[$i]
-		//TODO: devo cambiare gli id ai risultati nuovi!
         $('result<?php echo $i; ?>').show();
         ">
         <center>
@@ -188,10 +192,11 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         document.getElementById('active').id='inactive';
         this.id='active'; 
         nascondi_elementi_array(array_risultati);
+		//fa hide su tutti gli elementi
         nascondi_elementi_array(array_risultati_tfidf);
-        $('result_tagtfidf<?php echo $result_id; ?>').show();
+        $('result<?php echo $result_id; ?>').show();
         ">
-		<!-- ho cambiato il valore dell'id associato all'etichetta da mostrare con show -->
+		<!--  -->
         <center>
         	<a class=tags href=#>
                 
