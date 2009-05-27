@@ -22,10 +22,18 @@ $tags = $_GET['tag'];
 //query a google
 $size='large';
 $googlequery = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&hl=" . $_SESSION['language'] . "&start=" . $start . "&rsz=" . $size . "&hl=it&lstkp=45&q=" . $expandedqueryescaped;
-// ricevo il risultato della query a google
-$string = fgets(fopen($googlequery, "r")); 
-$obj = json_decode($string, true);
 
+//NEW lettura json, si era rotto perche su piú linee... 
+$handle = fopen($googlequery, "rb");
+$string = stream_get_contents($handle);
+fclose($handle);
+
+
+// OLD ricevo il risultato della query a google
+//$string = fgets(fopen($googlequery, "r")); 
+//salva il risultato json in un array associativo
+//utf8 codifica
+$obj = json_decode($string, true);
 
 ?>
 
@@ -33,6 +41,19 @@ $obj = json_decode($string, true);
 <tr>
   <td align=left valign=top>
   <?php echo "<b>" . number_format($obj["responseData"]["cursor"]["estimatedResultCount"]) . "</b> results found. <a href=# onclick=\"$('query" . $numerodiv . "').toggle();\"> View / hide query</a><br><span style=\"display:none; font-size:80%;\" id=query" . $numerodiv . ">Query: <b>" . $expandedquery . "</b></span> ";
+  
+  
+  /* //debug per JSON
+	echo "<p>richiesta a google: " . var_dump($googlequery) . "</p>";
+	echo "<p>stringa json di google per la query: " . var_dump($string) . "</p>";
+	echo "<p>oggetto json di google di json_decode: " . var_dump($obj) . "</p>";
+  */
+	
+
+//	echo "<p>risultati: " . $obj["responseData"];
+
+
+  
   ?>
   </td>
   

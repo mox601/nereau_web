@@ -275,7 +275,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           	</center>
           </div>
           
-<!-- e qui setta l'updater ajax che prende come parametri l'id (il result $i) e diversi altri parametri caratteristici dell'espansione -->
+<!-- e qui setta l'updater ajax che prende come parametri l'id (il result $i) e diversi altri parametri caratteristici dell'espansione. result_parse.php riceve questi parametri -->
           <script language="JavaScript">
             new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
             </script>
