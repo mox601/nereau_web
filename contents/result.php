@@ -16,7 +16,7 @@ echo "<p style=\"margin:5px;\">You wrote: <b>" . $key;
 
 echo "</b> ";
 
-//esecuzione comando di espansione in funzione della variabile key
+//esecuzione del comando di espansione in funzione della variabile key
 $args = array();
 $args['query']=$key;
 $args['language']=$_SESSION['language'];
@@ -126,7 +126,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         
         
         
-<!-- START blocchi successivi, con le espansioni STANDARD old nereau %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<!-- START blocchi successivi, con le espansioni STANDARD OLD nereau %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
         
         <?php
         //costruzione dei pulsanti di menu
@@ -209,13 +209,35 @@ mostra i tag che hanno partecipato ad ogni espansione -->
                 } ?>
                 
                 <?php 
-                //creo l'array dei tag da passare tramite ajax, cambiato il nome
+                //creo l'array dei tag da passare tramite ajax
                 $tags_tfidf[$i] = "";
+
+					//la dimensione del font è inversamente proporzionale al numero di tag presenti nell'etichetta
+					//le dimensioni di ogni tag sono uguali tra loro
+
+				//numero di tag usati nell'espansione                
+                $expansion_num_tags = sizeof($espansione_tfidf['results'][$i]['tags']);
+           //     echo "<p> n tags: " . $expansion_num_tags . "</p>";
+           //     echo "<p> font-size: " . (5+30/$expansion_num_tags) . "</p>";
+
                 //visualizzazione dei tag associati alla query espansa corrente 
                 for ($j=0; $j<(sizeof($espansione_tfidf['results'][$i]['tags'])); $j++) {
                   $tags_tfidf[$i] = $tags_tfidf[$i] . $espansione_tfidf['results'][$i]['tags'][$j]['rank'] . ":" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "|";
-                  echo "<span style=\"font-size:" . (5+9*($espansione_tfidf['results'][$i]['tags'][$j]['rank'] / $max)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
-                } ?>              
+                  //old size
+//                  echo "<span style=\"font-size:" . (5+9*($espansione_tfidf['results'][$i]['tags'][$j]['rank'] / $max)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
+// new size
+                  echo "<span style=\"font-size:" . (5 + 40 / $expansion_num_tags) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
+
+
+           
+                } //for tags 
+                
+				
+					
+                       
+                 ?>             
+                 
+                 
           		</a>
           	</center>
           	</div> <!-- END div id inactive -->
