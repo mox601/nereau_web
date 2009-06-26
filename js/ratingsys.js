@@ -50,6 +50,8 @@ function off(me, group){
 	}
 }
 
+
+
 // When you actually rate something //
 function rateIt(me, group, to_send_boolean, val, query, expandedquery, tags){
 	if(!rated[group]){
@@ -66,6 +68,27 @@ function rateIt(me, group, to_send_boolean, val, query, expandedquery, tags){
 		rating(me, group);
 	}
 }
+
+
+// When you actually rate something with EXPANSION TYPE //
+function rateItExpansion(me, group, to_send_boolean, val, query, expandedquery, tags, expansion_type){
+	if(!rated[group]){
+		document.getElementById(group+"_"+"rateStatus").innerHTML = document.getElementById(group+"_"+"ratingSaved").innerHTML + ": "+me.title;
+		preSet[group] = me;
+		rated[group]=1;
+    //se la votazione è gia stata espressa in qualche modo nelle pagine precedenti la variabile to_send_boolean è false
+    //setta il sistema come votato ma non ripetere l'azione ajax
+		if(to_send_boolean) {
+        document.getElementById('actions').innerHTML = 'Rating...<br><img src=images/loading.gif>';
+        //esegui il salvataggio dei dati passati come parametro dal sistema
+        sendRateExpansion(me, val, query, expandedquery, tags, expansion_type);
+      }
+		rating(me, group);
+	}
+}
+
+
+
 
 // Send the rating information somewhere using Ajax or something like that.
 function sendRate(sel,val, query, expandedquery, tags){
@@ -85,3 +108,32 @@ function sendRate(sel,val, query, expandedquery, tags){
               
 	
 }
+
+
+// Send the rating information WITH EXPANSION TYPE
+function sendRateExpansion(sel,val, query, expandedquery, tags, expansion_type){
+
+	//apri il file responsabile di salvare le informazioni nel database
+	new Ajax.Updater('actions', 'actions/rate.php', {
+              method: 'post',
+              parameters: {
+              query:query,
+              expandedquery:expandedquery,
+              tags:tags,
+              vote:val, 
+							expansion_type:expansion_type
+              },
+
+              onSuccess: function(transport) {
+            	displayerror("Your rating was: "+sel.title+ " (" + val +", for expansion type: "+
+							expansion_type + "). Thank you!");
+              }, evalScripts:true});
+              
+	
+}
+
+
+
+
+
+

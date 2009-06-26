@@ -34,8 +34,12 @@ $num_query_tfidf = sizeof($espansione_tfidf['results']);
 //$num_query_coocc = sizeof($espansione_coocc['results']);
 
 // stampa il numero delle espansioni, vecchie e nuove
+
+/*
 echo "(" . $num_query . " OLD expansions available)</p>"; 
 echo "(" . $num_query_tfidf . " TFIDF expansions available)</p>"; 
+*/
+
 //echo "(" . $num_query_coocc . " CO-OCC expansions available)</p>"; 
 ?>
 
@@ -59,21 +63,23 @@ echo "(" . $num_query_tfidf . " TFIDF expansions available)</p>";
 
 
 
-<!-- START risultati TFIDF %%% -->
+<!-- START risultati TFIDF con clustering %%% -->
   <script language=javascript>
 
     array_risultati_tfidf = new Array(
     
     <?php
 	//posso levare il result iniziale? non ha molto senso per me... 
-	//lo lascio? lo levo! devo avere solo gli id dei div dove ci sono 
-	//risultati dell'espansione tag tfidf
     //popolamento dell'array array_risultati utile per mostrare/nascondere i div dei risultati durante il rollover da menu
 
       for($i=0; $i<$num_query_tfidf; $i++) {
 	//cambio gli id perché questi risultati abbiano gli id successivi rispetto a quelli vecchi
 //      for($i=$num_query; $i< $num_query + $num_query_tfidf; $i++) {	
 		$id_result = $i + $num_query;
+		//id_result = [num_query, ..., num_query + num_query_tfidf]
+		//numquery è il numero di elementi dell'array con le espansioni vecchie
+		//lo uso per sapere quale è l'espansione che sto votando: 
+		//vecchia o nuova? se 
         echo "\"result" . $id_result . "\"";
 		//separatore tra i valori dell'array
 		if($i<($num_query_tfidf - 1)) {
@@ -214,19 +220,22 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 
 					//la dimensione del font è inversamente proporzionale al numero di tag presenti nell'etichetta
 					//le dimensioni di ogni tag sono uguali tra loro
-
+					//ora ho un valore per ogni tag, potrei cambiare le dimensioni!
 				//numero di tag usati nell'espansione                
                 $expansion_num_tags = sizeof($espansione_tfidf['results'][$i]['tags']);
            //     echo "<p> n tags: " . $expansion_num_tags . "</p>";
            //     echo "<p> font-size: " . (5+30/$expansion_num_tags) . "</p>";
 
-                //visualizzazione dei tag associati alla query espansa corrente 
-                for ($j=0; $j<(sizeof($espansione_tfidf['results'][$i]['tags'])); $j++) {
+                //visualizzazione dei tag associati alla query espansa corrente
+                $max_tags_per_label = 8;
+                $effective_tags_for_expansion = sizeof($espansione_tfidf['results'][$i]['tags']);
+                	
+                for ($j=0; $j < min($max_tags_per_label, $effective_tags_for_expansion); $j++) {
                   $tags_tfidf[$i] = $tags_tfidf[$i] . $espansione_tfidf['results'][$i]['tags'][$j]['rank'] . ":" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "|";
                   //old size
 //                  echo "<span style=\"font-size:" . (5+9*($espansione_tfidf['results'][$i]['tags'][$j]['rank'] / $max)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
 // new size
-                  echo "<span style=\"font-size:" . (5 + 40 / $expansion_num_tags) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
+                  echo "<span style=\"font-size:" . (5 + 40 / ($expansion_num_tags + 1)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
 
 
            
@@ -250,7 +259,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 
 
 
-<!-- START blocchi successivi, con le espansioni TAG-TAG CO-OCCURRENCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<!-- START blocchi successivi, con le espansioni TAG-TAG CO-OCCURRENCES (x il FUTURO) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 <!-- END blocchi successivi, con le espansioni TAG-TAG CO-OCCURRENCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 
    
@@ -266,7 +275,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
    
 <!-- resultbox contiene i risultati veri e propri, quelli di google  %%%%%%%%%%%%%%%%%%%%%%%%%%% -->
     <td valign=top>
-        <!-- START Primo div riservato alla query NON espansa 
+        <!-- START Primo div riservato alla query NON ESPANSA 
 	OCCHIO AI DIV=ID!!  -->
         <div id="result" class="resultbox">
         	<center>Loading..<br>
@@ -274,7 +283,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
         	</center>
         </div>
             <script language="JavaScript">
-            new Ajax.Updater('result', 'actions/result_parse.php', { method: 'get',parameters: {numerodiv:'', expandedquery: '<?php echo $key; ?>', originalquery:'<?php echo $key; ?>'}});
+            new Ajax.Updater('result', 'actions/result_parse.php', { method: 'get',parameters: {numerodiv:'', expandedquery: '<?php echo $key; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'no_expansion' }});
             </script>
         <!-- END Primo div riservato alla query non espansa -->
     
@@ -284,7 +293,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
 
 
 
-        <!-- START div dell'espansione originale di nereau per i resultbox ed esecuzione delle query a google   %%% -->
+        <!-- START div dell'espansione originale OLD di nereau per i resultbox ed esecuzione delle query a google   %%% -->
         <?php
           for($i=0; $i<$num_query; $i++) {
           //sostituzione degli spazi dalla query corrente
@@ -299,16 +308,10 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           
 <!-- e qui setta l'updater ajax che prende come parametri l'id (il result $i) e diversi altri parametri caratteristici dell'espansione. result_parse.php riceve questi parametri -->
           <script language="JavaScript">
-            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
+            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'co-occurrences' },evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox ed esecuzione delle query a google   %%%%%%% -->
-
-
-
-
-
-
 
 
 
@@ -337,7 +340,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           </div>
 
           <script language="JavaScript">
-            new Ajax.Updater('result<?php echo $result_id; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $result_id; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>'},evalScripts:true});
+            new Ajax.Updater('result<?php echo $result_id; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $result_id; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'tag_clustering' },evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox TAG TFIDF ed esecuzione delle query a google   %%%%%%% -->

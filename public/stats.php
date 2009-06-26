@@ -14,11 +14,16 @@ $result = pg_query($dbconn, "select count (*) AS tot from users;");
 $row = pg_fetch_all($result);
 $utenti =  $row['0']['tot'];
 
-
+/* totale di click a partire da query ESPANSE, è generico, comprende tutte le query (co-occurrences+clustering) */
 $result = pg_query($dbconn, "select count(*) as tot from visitedurls where  (expandedquery is not null AND expandedquery <> '');");
 $row = pg_fetch_all($result);
 $clickexp =  $row['0']['tot'];
 
+
+/* totale di click uscenti da query tag clustering */
+/* TODO */
+
+/* totale di click uscenti a partire da query NON espanse */
 $result = pg_query($dbconn, "select count(*) as tot from visitedurls where  (expandedquery = null OR expandedquery = '');");
 $row = pg_fetch_all($result);
 $clicknotexp =  $row['0']['tot'];
@@ -39,9 +44,12 @@ $activeusers =  $row['0']['tot'];
 	$chart->setDataSet($dataSet);
 	$chart->setTitle("Expansion system success");
 	$chart->render("../images/generated/demo3.png");
+	/* effettua il render sul file specificato */
 	
 	
 	
+	
+	/* success rate settimanale, sempre espansioni globali (co-occurrences + tag clustering) */
 for ($i=1;$i<7;$i++) {	
     $ora1 = 1000*(time() - (60*60*24*$i));
     $ora2 = 1000*(time() - (60*60*24*($i-1)));	
@@ -52,6 +60,7 @@ for ($i=1;$i<7;$i++) {
     $exp[$i] =  $row['0']['tot'];	
 }
 
+/* solo quelle non espanse */
 for ($i=1;$i<7;$i++) {	
     $ora1 = 1000*(time() - (60*60*24*$i));
     $ora2 = 1000*(time() - (60*60*24*($i-1)));	
@@ -62,6 +71,8 @@ for ($i=1;$i<7;$i++) {
     $notexp[$i] =  $row['0']['tot'];	
 }
 
+
+/* visitedurls TOTALI */
 for ($i=1;$i<7;$i++) {	
     $ora1 = 1000*(time() - (60*60*24*$i));
     $ora2 = 1000*(time() - (60*60*24*($i-1)));
@@ -101,10 +112,6 @@ for ($i=1;$i<7;$i++) {
 	$serie3->addPoint(new Point("2 day(s) ago", $exp[2]));
 	$serie3->addPoint(new Point("1 day(s) ago", $exp[1]));
 	
-
-
-
-
 	
 	$dataSet = new XYSeriesDataSet();
   $dataSet->addSerie("Total hits", $serie1);
@@ -118,7 +125,7 @@ for ($i=1;$i<7;$i++) {
 	$chart->setTitle("Success rate in the time");
 	$chart->getPlot()->setGraphCaptionRatio(0.62);
 	$chart->render("../images/generated/demo6.png");
-
+/* effettua il render */
 
 
 
@@ -131,16 +138,22 @@ for ($i=1;$i<7;$i++) {
 	$chart->setDataSet($dataSet);
 	$chart->setTitle("Users activity (latest 365 days)");
 	$chart->render("../images/generated/demo4.png");
-	
+	/* effettua il render */
 	
 	
 	
 	
 	//statistiche sulle votazioni!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
+	
+	
+	/* votazioni in generale */
 	//ultimi 365 giorni
   $ora = 1000*(time() - (60*60*24*365));	
-  $result = pg_query($dbconn, "select * from votes where date > $ora;");
+//AND expandedquery <> ''
+//  $result = pg_query($dbconn, "select * from votes where date > $ora;");
+//prende solo le votazioni che includono il tipo di espansione
+$result = pg_query($dbconn, "select * from votes where date > $ora AND expansiontypeid IS NOT NULL;");
   $votes = array();
   while ($arr = pg_fetch_array($result)) {
     array_push($votes, $arr['vote']);
@@ -164,6 +177,75 @@ for ($i=1;$i<7;$i++) {
 	$chart->setDataSet($dataSet);
 	$chart->setTitle("Users Ratings (latest 365 days)");
 	$chart->render("../images/generated/demo7.png");
+
+
+
+
+
+	/* votazioni del tag co-occurrences, expansiontype = 2 */
+	//ultimi 365 giorni
+	  $ora = 1000*(time() - (60*60*24*365));	
+	//prende solo le votazioni che includono il tipo di espansione = 2
+	$result = pg_query($dbconn, "select * from votes where date > $ora AND expansiontypeid = 2;");
+	  $votes = array();
+	  while ($arr = pg_fetch_array($result)) {
+	    array_push($votes, $arr['vote']);
+	  }
+
+	  $val1 = count(array_keys($votes, "1"));
+	  $val2 = count(array_keys($votes, "2"));
+	  $val3 = count(array_keys($votes, "3"));
+	  $val4 = count(array_keys($votes, "4"));
+	  $val5 = count(array_keys($votes, "5"));
+
+		$chart = new PieChart($width);
+
+		$dataSet = new XYDataSet();
+	  $dataSet->addPoint(new Point("1 - Inconsistent (" . $val1 . ")", $val1));
+		$dataSet->addPoint(new Point("2 - Superfluous (" . $val2 . ")", $val2));
+		$dataSet->addPoint(new Point("3 - Lean (" . $val3 . ")", $val3));
+		$dataSet->addPoint(new Point("4 - Usefull (" . $val4 . ")", $val4));
+		$dataSet->addPoint(new Point("5 - Very usefull (" . $val5 . ")", $val5));
+
+		$chart->setDataSet($dataSet);
+		$chart->setTitle("Users Ratings (latest 365 days) for co-occurrences");
+		$chart->render("../images/generated/demo9.png");
+
+
+
+
+
+/* votazioni del tag clustering, expansiontype = 3 */
+//ultimi 365 giorni
+  $ora = 1000*(time() - (60*60*24*365));	
+//prende solo le votazioni che includono il tipo di espansione = 3
+$result = pg_query($dbconn, "select * from votes where date > $ora AND expansiontypeid = 3;");
+  $votes = array();
+  while ($arr = pg_fetch_array($result)) {
+    array_push($votes, $arr['vote']);
+  }
+  
+  $val1 = count(array_keys($votes, "1"));
+  $val2 = count(array_keys($votes, "2"));
+  $val3 = count(array_keys($votes, "3"));
+  $val4 = count(array_keys($votes, "4"));
+  $val5 = count(array_keys($votes, "5"));
+  
+	$chart = new PieChart($width);
+
+	$dataSet = new XYDataSet();
+  $dataSet->addPoint(new Point("1 - Inconsistent (" . $val1 . ")", $val1));
+	$dataSet->addPoint(new Point("2 - Superfluous (" . $val2 . ")", $val2));
+	$dataSet->addPoint(new Point("3 - Lean (" . $val3 . ")", $val3));
+	$dataSet->addPoint(new Point("4 - Usefull (" . $val4 . ")", $val4));
+	$dataSet->addPoint(new Point("5 - Very usefull (" . $val5 . ")", $val5));
+	
+	$chart->setDataSet($dataSet);
+	$chart->setTitle("Users Ratings (latest 365 days) for tag clustering");
+	$chart->render("../images/generated/demo8.png");
+
+
+
 
   
 
@@ -212,7 +294,12 @@ Statistics for Nereau
 <img alt="chart"  src="../images/generated/demo3.png" style="border: 1px solid #f1c480;"/> 
 <img alt="chart"  src="../images/generated/demo6.png" style="border: 1px solid #f1c480;"/><br><br>
 <img alt="chart"  src="../images/generated/demo4.png" style="border: 1px solid #f1c480;"/> 
+
 <img alt="chart"  src="../images/generated/demo7.png" style="border: 1px solid #f1c480;"/> 
+<!-- statistiche voti per le co-occorrenze-->
+<img alt="chart"  src="../images/generated/demo9.png" style="border: 1px solid #f1c480;"/> 
+<!-- statistiche voti per il tag clustering-->
+<img alt="chart"  src="../images/generated/demo8.png" style="border: 1px solid #f1c480;"/> 
 
 
 

@@ -134,6 +134,41 @@ function insertRate($userid, $query, $expandedquery, $tags, $vote ) {
 }
 
 
+
+function insertRateExpansion($userid, $query, $expandedquery, $tags, $vote, $expansion_type ) {
+	/* codifica espansioni, in expansiontypes sul database: 
+	1 = no_expansion
+	2 = co-occurrence
+	3 = tag_clustering
+	*/
+	
+	
+	//values hard coded in db!!! 
+	switch ($expansion_type) {
+	    case "no_expansion":
+	//will never happen... 
+			$expansiontypeval = 1;
+	        break;
+	    case "co-occurrences":
+			$expansiontypeval = 2;
+	        break;
+	    case "tag_clustering":
+			$expansiontypeval = 3;
+	        break;
+	}
+	
+	
+//	echo 'expansion value in query: '.$expansiontypeval;
+	
+	$time = time();
+	$query = "INSERT INTO votes (iduser, query, expandedquery, tags, date, vote, expansiontypeid) VALUES ('$userid', '$query', '$expandedquery', '$tags', '" . $time . "000', '$vote', '$expansiontypeval');";
+	  if (!pg_query($query)) displayerror(pg_last_error());
+	
+//	echo 'query: '.$query;
+}
+
+
+
 ?>
 
 
