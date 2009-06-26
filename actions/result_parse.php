@@ -156,24 +156,30 @@ $risultati = $obj["responseData"]["results"];
 for($i=0; $i<sizeof($risultati);$i++) {
   ?>
 
-<!--
-	non trova i jsontags??
-	http://localhost:8888/nereau/index.php?content=redirect&url=http://www.msu.edu/user/schurerj/sounds.htm&query=jimmy&expandedquery=jimmy%20AND%20wav&tags=            &expansion_type=co-occurrences
-	
-	-->
-	
+<!-- aaa -->	
+
 	<?php
 	
-	$jsontags = $tags;
+	$tags_query = $_GET['tags_query_array'];	
+	echo "tags and query: ".$tags_query;
+	print_r($tags_query)."<br/>";
+
+	// for ( $f = 0; $f < sizeof($tags_query['tags']); $f++) {
+	// 		echo "$f";
+	// 	}
 	
-	echo "tags associati all'insieme di risultati e al link".$tags;
-	echo "ripetuti".$jsontags;
+	// for ($f = 0; $f < sizeof($tags_query[$i]['tags']) ; f++) {
+	// 		echo "$f";
+	// 		
+	// 	}
+	
+	// echo $tags_query[$i]['tags'][$f]['tag'];
+
 	
 	?>
 
 <!-- nel link includo anche il tipo di espansione usata -->
-  <a <?php if($tab) echo " target=_blank " ?> href="?content=redirect&url=<?php echo $risultati[$i]["url"];?>&query=<?php echo $originalquery;?>&expandedquery=<?php echo $expandedquery?>&tags=<?php echo($jsontags);?>&expansion_type=<?php echo $expansion_type;?>">
-	 <!-- ho levato json da tags, ma devo comunque tenerlo encoded-->
+  <a <?php if($tab) echo " target=_blank " ?> href="?content=redirect&url=<?php echo $risultati[$i]["url"];?>&query=<?php echo $originalquery;?>&expandedquery=<?php echo $expandedquery?>&tags=<?php echo 'aaa';?>&expansion_type=<?php echo $expansion_type;?>">
   
   <!--  Decommentare per non usare il redirect e inserire l'handler nel tag <a> precedente al posto dei parametri get
   onclick="

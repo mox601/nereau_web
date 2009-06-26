@@ -23,6 +23,10 @@ $args['language']=$_SESSION['language'];
 
 $espansione = exec_cmd ('expand', $args);
 $espansione_tfidf = exec_cmd ('expand_tfidf', $args);
+
+// echo "risposta ricevuta dal server: ";
+// print_r($espansione_tfidf);
+
 //espansione con co-occorrenze tag tag
 //$espansione_coocc = exec_cmd ('expand_tfidf', $args);
 
@@ -161,11 +165,23 @@ mostra i tag che hanno partecipato ad ogni espansione -->
                 } ?>
                 
                 <?php 
+
+				//qui salvo l'array di tags con i rispettivi ranking, 
+				$tags_rankings_coocc[$i] = $espansione['results'][$i]['tags'];
+				// print_r($tags_rankings_coocc[$i]);
+				
+				
+				
+
                 //creo l'array dei tag da passare tramite ajax, quello che viene registrato durante il ranking con le stelline
                 $tags[$i] = "";
-                //visualizzazione dei tag associati alla query espansa corrente 
+
+                //conversione in stringa dei tag associati alla query espansa corrente 
                 for ($j=0; $j<(sizeof($espansione['results'][$i]['tags'])); $j++) {
                   $tags[$i] = $tags[$i] . $espansione['results'][$i]['tags'][$j]['rank'] . ":" . $espansione['results'][$i]['tags'][$j]['tag'] . "|";
+
+
+
                   echo "<span style=\"font-size:" . (5+9*($espansione['results'][$i]['tags'][$j]['rank'] / $max)) . "pt\">" . $espansione['results'][$i]['tags'][$j]['tag'] . "</span> ";
                 } ?>              
           		</a>
@@ -215,7 +231,15 @@ mostra i tag che hanno partecipato ad ogni espansione -->
                 } ?>
                 
                 <?php 
-                //creo l'array dei tag da passare tramite ajax
+
+
+//salvo i tags senza codificarli, per passarli in ajax
+				$tags_query_tfidf[$i] = $espansione_tfidf['results'][$i];
+				// print_r($tags_query_tfidf[$i]);
+				
+				
+
+                //creo l'array dei tag codificati da passare tramite ajax
                 $tags_tfidf[$i] = "";
 
 					//la dimensione del font è inversamente proporzionale al numero di tag presenti nell'etichetta
@@ -305,10 +329,17 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           		<img src=images/loading.gif><br><br><br><br>
           	</center>
           </div>
+
+<?php
+		//encode json
+		$json_tags_rankings_coocc[$i] = json_encode($tags_rankings_coocc[$i]);
+
+?>
+
           
 <!-- e qui setta l'updater ajax che prende come parametri l'id (il result $i) e diversi altri parametri caratteristici dell'espansione. result_parse.php riceve questi parametri -->
           <script language="JavaScript">
-            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'co-occurrences' },evalScripts:true});
+            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'co-occurrences', tags_rankings_array:'<?php echo $tags_rankings_coocc[$i]; ?>' },evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox ed esecuzione delle query a google   %%%%%%% -->
@@ -339,8 +370,16 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           	</center>
           </div>
 
+<?php
+//encode json
+$json_tags_rankings_tfidf[$i] = json_encode($tags_rankings_tfidf[$i]);
+
+
+
+?>
+
           <script language="JavaScript">
-            new Ajax.Updater('result<?php echo $result_id; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $result_id; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'tag_clustering' },evalScripts:true});
+            new Ajax.Updater('result<?php echo $result_id; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $result_id; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'tag_clustering', tags_query_array:'<?php echo $tags_query_tfidf[$i]; ?>' },evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox TAG TFIDF ed esecuzione delle query a google   %%%%%%% -->
