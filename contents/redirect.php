@@ -33,7 +33,7 @@ $args['tags']=$tags;
 
 //salva il risultato solo se l'utente è autenticato
 if ($_SESSION['userid'] != '0') {
-$result = exec_cmd ('savevisitedurl', $args);
+// $result = exec_cmd ('savevisitedurl', $args);
 //ho aggiornato il metodo: accetta anche il TIPO DI QUERY usata per l'espansione
 }
 

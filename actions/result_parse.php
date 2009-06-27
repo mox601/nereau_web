@@ -159,49 +159,35 @@ for($i=0; $i<sizeof($risultati);$i++) {
 <!-- aaa -->	
 
 	<?php
-	
-	$tags_query = $_GET['tags_query_array'];	
-	echo "tags and query: ".$tags_query;
-	print_r($tags_query)."<br/>";
-
-	// for ( $f = 0; $f < sizeof($tags_query['tags']); $f++) {
-	// 		echo "$f";
-	// 	}
-	
-	// for ($f = 0; $f < sizeof($tags_query[$i]['tags']) ; f++) {
-	// 		echo "$f";
-	// 		
-	// 	}
-	
-	// echo $tags_query[$i]['tags'][$f]['tag'];
-
-	
+	/* dalla sessione ricevo l'array json con tags e query relative ai risultati dell'etichetta */
+	$tags_query_slashes = $_GET['tags_query_array'];
+	// echo $tags_query_slashes;						
 	?>
 
 <!-- nel link includo anche il tipo di espansione usata -->
-  <a <?php if($tab) echo " target=_blank " ?> href="?content=redirect&url=<?php echo $risultati[$i]["url"];?>&query=<?php echo $originalquery;?>&expandedquery=<?php echo $expandedquery?>&tags=<?php echo 'aaa';?>&expansion_type=<?php echo $expansion_type;?>">
-  
-  <!--  Decommentare per non usare il redirect e inserire l'handler nel tag <a> precedente al posto dei parametri get
-  onclick="
-  new Ajax.Updater('actions', 'actions/click.php', {
+
+  <a <?php if($tab) echo " target=_blank "; ?> onclick="new Ajax.Updater('actions','actions/click.php', {
               onSuccess: function(transport) {
-              setTimeout(window.location.href='<?php echo $risultati[$i]["url"];?>', 500);
+              <!-- setTimeout(window.location.href='<?php echo $risultati[$i]['url'];?>', 5000); -->
               },
               parameters: {
                 query:'<?php echo $originalquery;?>',
-                url:'<?php echo $risultati[$i]["url"];?>',
-                expandedquery:'<?php echo $expandedquery?>',
-                tags:'<?php echo $tags;?>'
+                url:'<?php echo $risultati[$i]['url'];?>',
+                expandedquery:'<?php echo $expandedquery;?>',
+                tags:'<?php echo $tags; ?>',
+				expansion_type:'<?php echo $expansion_type;?>' 
+				<!-- tags_query:'<?php //echo $tags_query_slashes;?>' -->
                 
                 } , method:'post'});
               
 
-  "
-  -->
+  " >
+
+
   <?php
   echo "" . $risultati[$i]["title"] . "</a><br>";
-  echo "<div style=\"margin-left:8px;\">" . $risultati[$i]["content"] . "</div>";
-  echo "<div style=\"margin-left:8px; font-size:80%;\"><i>" . $risultati[$i]["unescapedUrl"] . "</i></div><br>";
+  echo "<div style=\"margin-left:8px;\">" . $risultati[$i]['content'] . "</div>";
+  echo "<div style=\"margin-left:8px; font-size:80%;\"><i>" . $risultati[$i]['unescapedUrl'] . "</i></div><br>";
 
 }
 ?>

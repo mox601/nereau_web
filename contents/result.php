@@ -339,7 +339,7 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           
 <!-- e qui setta l'updater ajax che prende come parametri l'id (il result $i) e diversi altri parametri caratteristici dell'espansione. result_parse.php riceve questi parametri -->
           <script language="JavaScript">
-            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'co-occurrences', tags_rankings_array:'<?php echo $tags_rankings_coocc[$i]; ?>' },evalScripts:true});
+            new Ajax.Updater('result<?php echo $i; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags[$i]; ?>', numerodiv:'<?php echo $i; ?>', expandedquery: '<?php echo $query; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'co-occurrences', tags_query_array:'<?php echo $tags_query_coocc[$i]; ?>' },evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox ed esecuzione delle query a google   %%%%%%% -->
@@ -371,15 +371,15 @@ mostra i tag che hanno partecipato ad ogni espansione -->
           </div>
 
 <?php
-//encode json
-$json_tags_rankings_tfidf[$i] = json_encode($tags_rankings_tfidf[$i]);
 
-
+/* devo prima codificarlo in json, per passarlo nella sessione con js */
+$json_tags_query_tfidf[$i] = json_encode($tags_query_tfidf[$i]);
+$json_tags_query_tfidf_slashes[$i] = $json_tags_query_tfidf[$i];
 
 ?>
 
           <script language="JavaScript">
-            new Ajax.Updater('result<?php echo $result_id; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $result_id; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'tag_clustering', tags_query_array:'<?php echo $tags_query_tfidf[$i]; ?>' },evalScripts:true});
+            new Ajax.Updater('result<?php echo $result_id; ?>', 'actions/result_parse.php', { method: 'get',parameters: {tag:'<?php echo $tags_tfidf[$i]; ?>', numerodiv:'<?php echo $result_id; ?>', expandedquery: '<?php echo $query_tfidf; ?>', originalquery:'<?php echo $key; ?>', expansion_type:'tag_clustering', tags_query_array:'<?php echo $json_tags_query_tfidf_slashes[$i]; ?>' },evalScripts:true});
             </script>
           <? } ?>
         <!-- END  div per i resultbox TAG TFIDF ed esecuzione delle query a google   %%%%%%% -->
