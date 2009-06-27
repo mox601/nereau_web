@@ -4,7 +4,7 @@ include('../config/vars.php');
 include('../config/functions.php');
 ?>
 
-Aggiornamento informazioni
+<!-- Aggiornamento informazioni -->
 
 <?php
 //variabili
@@ -47,8 +47,6 @@ foreach ($tags_strings as $tag_string) {
 	$j++;
 }
 
-
-
 $args = array();
 
 $args['query']=$query;
@@ -70,14 +68,5 @@ if($expandedquery!=$query) {
 
 $result = exec_cmd ('savevisitedurl', $args)
 
-
-/*
-[
-{\"tag\":\"encyclopedia\",\"value\":\"4.212\"},
-{\"tag\":\"wiki\",\"value\":\"5.346\"},
-{\"tag\":\"reference\",\"value\":\"4.05\"}
-]
-
-*/
 
 ?>

@@ -166,9 +166,9 @@ for($i=0; $i<sizeof($risultati);$i++) {
 
 <!-- nel link includo anche il tipo di espansione usata -->
 
-  <a <?php if($tab) echo " target=_blank "; ?> onclick="new Ajax.Updater('actions','actions/click.php', {
+  <a <?php if($tab) echo " target=_blank "; ?> href="<?php echo $risultati[$i]['url']; ?>" onclick="new Ajax.Updater('actions','actions/click.php', {
               onSuccess: function(transport) {
-              <!-- setTimeout(window.location.href='<?php echo $risultati[$i]['url'];?>', 5000); -->
+              setTimeout(window.location.href='<?php echo $risultati[$i]['url'];?>', 500);
               },
               parameters: {
                 query:'<?php echo $originalquery;?>',
