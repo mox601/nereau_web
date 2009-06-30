@@ -233,12 +233,10 @@ mostra i tag che hanno partecipato ad ogni espansione -->
                 <?php 
 
 
-//salvo i tags senza codificarli, per passarli in ajax
+				//salvo i tags senza codificarli, per passarli in ajax
 				$tags_query_tfidf[$i] = $espansione_tfidf['results'][$i];
 				// print_r($tags_query_tfidf[$i]);
 				
-				
-
                 //creo l'array dei tag codificati da passare tramite ajax
                 $tags_tfidf[$i] = "";
 
@@ -259,15 +257,12 @@ mostra i tag che hanno partecipato ad ogni espansione -->
                   //old size
 //                  echo "<span style=\"font-size:" . (5+9*($espansione_tfidf['results'][$i]['tags'][$j]['rank'] / $max)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
 // new size
-                  echo "<span style=\"font-size:" . (5 + 40 / ($expansion_num_tags + 1)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
-
+                  echo "<span style=\"font-style:italic;font-size:" . (5 + 40 / ($expansion_num_tags + 1)) . "pt\">" . $espansione_tfidf['results'][$i]['tags'][$j]['tag'] . "</span> ";
 
            
                 } //for tags 
                 
-				
-					
-                       
+		         
                  ?>             
                  
                  
@@ -385,13 +380,6 @@ $json_tags_query_tfidf_slashes[$i] = $json_tags_query_tfidf[$i];
         <!-- END  div per i resultbox TAG TFIDF ed esecuzione delle query a google   %%%%%%% -->
         
 <!-- END TAG TFIDF-->
-
-
-
-
-
-
-
 
 
 
